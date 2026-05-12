@@ -19,7 +19,7 @@ $sidebarAvatar = $row['avatar'] ?? null;
         <div class="sidebar-section">
             <div class="sidebar-section-label">Library</div>
             <nav class="sidebar-nav">
-                <a href="dashboard.php" class="<?= ($page ?? '') === 'dashboard' ? 'active' : '' ?>">
+                <a href="/dashboard.php" class="<?= ($page ?? '') === 'dashboard' ? 'active' : '' ?>">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/>
                     </svg>
@@ -37,7 +37,7 @@ $sidebarAvatar = $row['avatar'] ?? null;
                     </svg>
                     Favorites
                 </a>
-                <a href="items/create.php" class="<?= ($page ?? '') === 'create' ? 'active' : '' ?>">
+                <a href="/items/create.php" class="<?= ($page ?? '') === 'create' ? 'active' : '' ?>">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
                     </svg>
@@ -52,19 +52,19 @@ $sidebarAvatar = $row['avatar'] ?? null;
         <div class="sidebar-section">
             <div class="sidebar-section-label">Platform</div>
             <nav class="sidebar-nav">
-                <a href="admin/admin.php" class="<?= ($page ?? '') === 'admin' ? 'active' : '' ?>">
+                <a href="/admin/admin.php" class="<?= ($page ?? '') === 'admin' ? 'active' : '' ?>">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
                     </svg>
                     Overview
                 </a>
-                <a href="admin/admin-items.php" class="<?= ($page ?? '') === 'admin-items' ? 'active' : '' ?>">
+                <a href="/admin/admin-items.php" class="<?= ($page ?? '') === 'admin-items' ? 'active' : '' ?>">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
                     </svg>
                     All Items
                 </a>
-                <a href="admin/admin-users.php" class="<?= ($page ?? '') === 'admin-users' ? 'active' : '' ?>">
+                <a href="/admin/admin-users.php" class="<?= ($page ?? '') === 'admin-users' ? 'active' : '' ?>">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                     </svg>
@@ -79,7 +79,7 @@ $sidebarAvatar = $row['avatar'] ?? null;
         <div class="sidebar-section">
             <div class="sidebar-section-label">Account</div>
             <nav class="sidebar-nav">
-                <a href="auth/profile.php" class="<?= ($page ?? '') === 'profile' ? 'active' : '' ?>">
+                <a href="/auth/profile.php" class="<?= ($page ?? '') === 'profile' ? 'active' : '' ?>">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
                     </svg>
@@ -96,7 +96,7 @@ $sidebarAvatar = $row['avatar'] ?? null;
 
         <div class="sidebar-footer">
             <div class="sf-row">
-                <a href="auth/profile.php" class="sf-link">
+                <a href="/auth/profile.php" class="sf-link">
                     <div class="sf-avatar">
                         <?php if ($sidebarAvatar): ?>
                             <img src="<?= htmlEncode($sidebarAvatar) ?>" alt="">
@@ -106,7 +106,7 @@ $sidebarAvatar = $row['avatar'] ?? null;
                     </div>
                     <div>
                         <div class="sf-name"><?= htmlEncode($_SESSION['username']) ?></div>
-                        <a href="logout.php" class="sf-action">Sign out</a>
+                        <a href="/auth/logout.php" class="sf-action">Sign out</a>
                     </div>
                 </a>
             </div>
@@ -127,7 +127,7 @@ $sidebarAvatar = $row['avatar'] ?? null;
                 <div>
                     <div class="topbar-title"><?= htmlEncode($pageTitle ?? '') ?></div>
                     <div class="topbar-breadcrumb">
-                        <a href="dashboard.php">PKWeb</a>
+                        <a href="/dashboard.php">PKWeb</a>
                         <span>/</span>
                         <?= htmlEncode($breadcrumb ?? '') ?>
                     </div>

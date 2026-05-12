@@ -4,7 +4,7 @@ require_once __DIR__ . '/../config.php';
 $error = '';
 
 if (isLoggedIn()) {
-    header('Location: dashboard.php');
+    header('Location: /dashboard.php');
     exit;
 }
 
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['username'] = $user['username'];
                     $_SESSION['authenticated'] = true;
                     $_SESSION['role'] = $user['role'] ?? 'user';
-                    header('Location: ' . ($_SESSION['role'] === 'admin' ? 'admin.php' : 'dashboard.php'));
+                    header('Location: ' . ($_SESSION['role'] === 'admin' ? '/admin/admin.php' : '/dashboard.php'));
                     exit;
                 } else {
                     $error = 'Invalid username or password';
@@ -266,7 +266,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
 
         <div class="auth-footer">
-            Don't have an account? <a href="register.php">Register</a>
+            Don't have an account? <a href="/auth/register.php">Register</a>
         </div>
     </div>
 

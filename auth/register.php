@@ -5,7 +5,7 @@ $error = '';
 $success = '';
 
 if (isLoggedIn()) {
-    header('Location: dashboard.php');
+    header('Location: /dashboard.php');
     exit;
 }
 
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $_SESSION['username'] = $newUser['username'];
                         $_SESSION['authenticated'] = true;
                         $_SESSION['role'] = $newUser['role'] ?? 'user';
-                        header('Location: ' . ($_SESSION['role'] === 'admin' ? 'admin.php' : 'dashboard.php'));
+                        header('Location: ' . ($_SESSION['role'] === 'admin' ? '/admin/admin.php' : '/dashboard.php'));
                         exit;
                     }
                 }
@@ -342,7 +342,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
 
         <div class="auth-footer">
-            Already have an account? <a href="index.php">Sign in</a>
+            Already have an account? <a href="/auth/index.php">Sign in</a>
         </div>
     </div>
 

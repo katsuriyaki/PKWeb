@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/config.php';
 requireLogin();
 
 $page = 'dashboard';
@@ -45,7 +45,7 @@ $topbarActions = '<button class="btn btn-ghost" onclick="location.reload()">
     </svg>
     <span>Refresh</span>
 </button>
-<a href="items/create.php" class="btn btn-primary">
+<a href="/items/create.php" class="btn btn-primary">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
         <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
     </svg>
@@ -350,7 +350,7 @@ $topbarActions = '<button class="btn btn-ghost" onclick="location.reload()">
         </div>
         <div class="empty-title">Nothing here yet</div>
         <div class="empty-sub">Create your first item to get started.</div>
-        <a href="items/create.php" class="btn btn-primary">
+        <a href="/items/create.php" class="btn btn-primary">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
                 <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
             </svg>

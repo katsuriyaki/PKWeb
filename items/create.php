@@ -5,7 +5,7 @@ requireLogin();
 $page = 'create';
 $pageTitle = 'New Item';
 $breadcrumb = $_SESSION['username'] . ' / New Item';
-$topbarActions = '<a href="../dashboard.php" class="btn btn-ghost">
+$topbarActions = '<a href="/dashboard.php" class="btn btn-ghost">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
     </svg>
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $db = getDB();
                 $stmt = $db->prepare("INSERT INTO items (user_id, title, description) VALUES (?, ?, ?)");
                 $stmt->execute([$_SESSION['user_id'], $title, $description]);
-                header('Location: dashboard.php');
+                header('Location: /dashboard.php');
                 exit;
             } catch (PDOException $e) {
                 $error = 'Failed to create item';
@@ -49,11 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
     <style>
-        <?php include __DIR__ . '/includes/shared-styles.php'; echo $shared_css; ?>
+        <?php include __DIR__ . '/../includes/shared-styles.php'; echo $shared_css; ?>
     </style>
 </head>
 <body>
-<?php include __DIR__ . '/includes/page-header.php'; ?>
+<?php include __DIR__ . '/../includes/page-header.php'; ?>
 
 <?php if ($error): ?>
 <div class="alert alert-danger">
@@ -84,9 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </svg>
                 Create Item
             </button>
-            <a href="../dashboard.php" class="btn btn-ghost">Cancel</a>
+            <a href="/dashboard.php" class="btn btn-ghost">Cancel</a>
         </div>
     </form>
 </div>
 
-<?php include __DIR__ . '/includes/page-footer.php'; ?>
+<?php include __DIR__ . '/../includes/page-footer.php'; ?>

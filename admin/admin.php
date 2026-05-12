@@ -43,7 +43,7 @@ try {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
     <style>
-        <?php include __DIR__ . '/includes/shared-styles.php'; echo $shared_css; ?>
+        <?php include __DIR__ . '/../includes/shared-styles.php'; echo $shared_css; ?>
 
         /* ── Admin layout ─────────────────────────── */
         .admin-badge {
@@ -230,7 +230,7 @@ try {
     </style>
 </head>
 <body>
-<?php include __DIR__ . '/includes/page-header.php'; ?>
+<?php include __DIR__ . '/../includes/page-header.php'; ?>
 
 <?php if ($success): ?>
 <div class="alert alert-success"><?= htmlEncode($success) ?></div>
@@ -269,7 +269,7 @@ try {
                 </svg>
                 <input type="text" class="search-input" placeholder="Filter users…" oninput="filterUsers(this.value)">
             </div>
-            <a href="admin-users.php" class="btn btn-ghost btn-sm">View all →</a>
+            <a href="/admin/admin-users.php" class="btn btn-ghost btn-sm">View all →</a>
         </div>
     </div>
 
@@ -315,7 +315,7 @@ try {
     <?php endif; ?>
 </div>
 
-<?php include __DIR__ . '/includes/page-footer.php'; ?>
+<?php include __DIR__ . '/../includes/page-footer.php'; ?>
 
 <script>
     function filterUsers(q) {

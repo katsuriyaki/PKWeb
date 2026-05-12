@@ -60,7 +60,7 @@ function isLoggedIn() {
 // Require login
 function requireLogin() {
     if (!isLoggedIn()) {
-        header('Location: index.php');
+        header('Location: /auth/index.php');
         exit;
     }
 }
@@ -73,11 +73,11 @@ function isAdmin() {
 // Require admin — redirects to index if not logged in, dashboard if not admin
 function requireAdmin() {
     if (!isLoggedIn()) {
-        header('Location: index.php');
+        header('Location: /auth/index.php');
         exit;
     }
     if (!isAdmin()) {
-        header('Location: dashboard.php');
+        header('Location: /dashboard.php');
         exit;
     }
 }

@@ -62,7 +62,7 @@ try {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
     <style>
-        <?php include __DIR__ . '/includes/shared-styles.php'; echo $shared_css; ?>
+        <?php include __DIR__ . '/../includes/shared-styles.php'; echo $shared_css; ?>
 
         .admin-badge {
             display: inline-flex;
@@ -260,7 +260,7 @@ try {
     </style>
 </head>
 <body>
-<?php include __DIR__ . '/includes/page-header.php'; ?>
+<?php include __DIR__ . '/../includes/page-header.php'; ?>
 
 <?php if ($success): ?>
 <div class="alert alert-success">
@@ -305,7 +305,7 @@ try {
             </div>
             <button type="submit" class="btn btn-ghost btn-sm">Search</button>
             <?php if ($search): ?>
-                <a href="admin-items.php" class="btn btn-ghost btn-sm">Clear</a>
+                <a href="/admin/admin-items.php" class="btn btn-ghost btn-sm">Clear</a>
             <?php endif; ?>
         </form>
     </div>
@@ -341,7 +341,7 @@ try {
                 </td>
                 <td class="actions-cell">
                     <div class="actions-group">
-                        <a href="../view.php?id=<?= $item['id'] ?>" class="btn btn-ghost btn-sm">View</a>
+                        <a href="/items/view.php?id=<?= $item['id'] ?>" class="btn btn-ghost btn-sm">View</a>
                         <button type="button" class="btn btn-danger-ghost btn-sm" onclick="openDeleteModal(<?= $item['id'] ?>, '<?= htmlEncode($item['title'], true) ?>')">Delete</button>
                     </div>
                 </td>
@@ -369,7 +369,7 @@ try {
     </div>
 </div>
 
-<?php include __DIR__ . '/includes/page-footer.php'; ?>
+<?php include __DIR__ . '/../includes/page-footer.php'; ?>
 
 <script>
     function openDeleteModal(id, title) {

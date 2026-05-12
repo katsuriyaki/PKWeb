@@ -750,7 +750,7 @@ $daysActive = $user ? (int)((time() - strtotime($user['created_at'])) / 86400) :
         <div class="sidebar-section">
             <div class="sidebar-section-label">Library</div>
             <nav class="sidebar-nav">
-                <a href="../dashboard.php">
+                <a href="/dashboard.php">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/>
                     </svg>
@@ -768,7 +768,7 @@ $daysActive = $user ? (int)((time() - strtotime($user['created_at'])) / 86400) :
                     </svg>
                     Favorites
                 </a>
-                <a href="../items/create.php">
+                <a href="/items/create.php">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
                     </svg>
@@ -783,19 +783,19 @@ $daysActive = $user ? (int)((time() - strtotime($user['created_at'])) / 86400) :
         <div class="sidebar-section">
             <div class="sidebar-section-label">Platform</div>
             <nav class="sidebar-nav">
-                <a href="../admin.php">
+                <a href="/admin/admin.php">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
                     </svg>
                     Overview
                 </a>
-                <a href="../admin-items.php">
+                <a href="/admin/admin-items.php">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
                     </svg>
                     All Items
                 </a>
-                <a href="../admin-users.php">
+                <a href="/admin/admin-users.php">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                     </svg>
@@ -837,7 +837,7 @@ $daysActive = $user ? (int)((time() - strtotime($user['created_at'])) / 86400) :
                     </div>
                     <div>
                         <div class="sf-name"><?= htmlEncode($_SESSION['username']) ?></div>
-                        <a href="logout.php" class="sf-action">Sign out</a>
+                        <a href="/auth/logout.php" class="sf-action">Sign out</a>
                     </div>
                 </a>
             </div>
@@ -858,7 +858,7 @@ $daysActive = $user ? (int)((time() - strtotime($user['created_at'])) / 86400) :
                 <div>
                     <div class="topbar-title">Profile</div>
                     <div class="topbar-breadcrumb">
-                        <a href="../dashboard.php">PKWeb</a>
+                        <a href="/dashboard.php">PKWeb</a>
                         <span>/</span>
                         Account
                     </div>
@@ -977,11 +977,11 @@ $daysActive = $user ? (int)((time() - strtotime($user['created_at'])) / 86400) :
                 <div class="card">
                     <div class="card-header">
                         <span class="card-title">Recent Items</span>
-                        <a href="../dashboard.php" style="font-size: 12px; color: var(--accent); text-decoration: none; font-weight: 500;">View all →</a>
+                        <a href="/dashboard.php" style="font-size: 12px; color: var(--accent); text-decoration: none; font-weight: 500;">View all →</a>
                     </div>
                     <div class="card-body">
                         <?php if (empty($recent)): ?>
-                        <div class="activity-empty">No items yet. <a href="../items/create.php" style="color: var(--accent); text-decoration: none;">Create one →</a></div>
+                        <div class="activity-empty">No items yet. <a href="/items/create.php" style="color: var(--accent); text-decoration: none;">Create one →</a></div>
                         <?php else: ?>
                             <?php foreach ($recent as $r): ?>
                             <div class="activity-item">
@@ -1007,7 +1007,7 @@ $daysActive = $user ? (int)((time() - strtotime($user['created_at'])) / 86400) :
                             <strong>Sign out of your account</strong>
                             Ends your current session on this device.
                         </div>
-                        <a href="logout.php" class="btn btn-danger">Sign Out</a>
+                        <a href="/auth/logout.php" class="btn btn-danger">Sign Out</a>
                     </div>
                 </div>
             </div>

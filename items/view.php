@@ -4,7 +4,7 @@ requireLogin();
 
 $id = (int)($_GET['id'] ?? 0);
 if ($id <= 0) {
-    header('Location: dashboard.php');
+    header('Location: /dashboard.php');
     exit;
 }
 
@@ -18,14 +18,14 @@ try {
 }
 
 if (!$item) {
-    header('Location: dashboard.php');
+    header('Location: /dashboard.php');
     exit;
 }
 
 $page = 'view';
 $pageTitle = htmlEncode($item['title']);
 $breadcrumb = $_SESSION['username'] . ' / View';
-$topbarActions = '<a href="../dashboard.php" class="btn btn-ghost">
+$topbarActions = '<a href="/dashboard.php" class="btn btn-ghost">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
     </svg>
@@ -42,7 +42,7 @@ $topbarActions = '<a href="../dashboard.php" class="btn btn-ghost">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
     <style>
-        <?php include __DIR__ . '/includes/shared-styles.php'; echo $shared_css; ?>
+        <?php include __DIR__ . '/../includes/shared-styles.php'; echo $shared_css; ?>
 
         /* ── Detail Card ─────────────────────────── */
         .detail-card {
@@ -99,7 +99,7 @@ $topbarActions = '<a href="../dashboard.php" class="btn btn-ghost">
     </style>
 </head>
 <body>
-<?php include __DIR__ . '/includes/page-header.php'; ?>
+<?php include __DIR__ . '/../includes/page-header.php'; ?>
 
 <div class="detail-card">
     <div class="detail-header">
@@ -125,14 +125,14 @@ $topbarActions = '<a href="../dashboard.php" class="btn btn-ghost">
     </div>
 
     <div class="form-actions">
-        <a href="edit.php?id=<?= $item['id'] ?>" class="btn btn-primary">
+        <a href="/items/edit.php?id=<?= $item['id'] ?>" class="btn btn-primary">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
             </svg>
             Edit Item
         </a>
-        <a href="../dashboard.php" class="btn btn-ghost">
+        <a href="/dashboard.php" class="btn btn-ghost">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                 <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
             </svg>
@@ -141,4 +141,4 @@ $topbarActions = '<a href="../dashboard.php" class="btn btn-ghost">
     </div>
 </div>
 
-<?php include __DIR__ . '/includes/page-footer.php'; ?>
+<?php include __DIR__ . '/../includes/page-footer.php'; ?>
