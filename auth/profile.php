@@ -15,25 +15,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['avatar_action'])) {
             $error = 'No file uploaded.';
         } else {
             $file = $_FILES['avatar_file'];
+
+            // Server-side MIME verification (not client-supplied type)
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $realMime = finfo_file($finfo, $file['tmp_name']);
+            finfo_close($finfo);
             $allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-            if (!in_array($file['type'], $allowed)) {
+            if (!in_array($realMime, $allowed)) {
                 $error = 'Only JPG, PNG, GIF, or WebP allowed.';
             } elseif ($file['size'] > 2 * 1024 * 1024) {
                 $error = 'Image must be under 2MB.';
             } else {
-                $dir = __DIR__ . '/uploads/avatars';
+                $dir = __DIR__ . '/../uploads/avatars';
                 if (!is_dir($dir)) mkdir($dir, 0755, true);
 
                 $db = getDB();
                 $stmt = $db->prepare("SELECT avatar FROM users WHERE id = ?");
                 $stmt->execute([$user_id]);
                 $old = $stmt->fetch()['avatar'] ?? null;
-                if ($old && file_exists(__DIR__ . $old)) unlink(__DIR__ . $old);
+
+                // Path traversal protection
+                $oldPath = null;
+                if ($old) {
+                    $resolved = realpath(__DIR__ . '/../' . $old);
+                    $allowedDir = realpath(__DIR__ . '/../uploads/avatars');
+                    if ($resolved && $allowedDir && strpos($resolved, $allowedDir) === 0) {
+                        $oldPath = $resolved;
+                    }
+                }
 
                 $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
                 $filename = $user_id . '_' . time() . '.' . $ext;
                 $path = '/uploads/avatars/' . $filename;
-                $dest = __DIR__ . $path;
+                $dest = $dir . '/' . $filename;
 
                 if (is_uploaded_file($file['tmp_name'])) {
                     $ok = move_uploaded_file($file['tmp_name'], $dest);
@@ -45,6 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['avatar_action'])) {
                     $stmt = $db->prepare("UPDATE users SET avatar = ? WHERE id = ?");
                     $stmt->execute([$path, $user_id]);
                     $_SESSION['avatar'] = $path;
+                    // Delete old avatar after DB is updated (prevents race condition)
+                    if ($oldPath) {
+                        @unlink($oldPath);
+                    }
                     $success = 'Avatar updated successfully.';
                 } else {
                     $error = 'Failed to save image.';
@@ -56,10 +74,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['avatar_action'])) {
         $stmt = $db->prepare("SELECT avatar FROM users WHERE id = ?");
         $stmt->execute([$user_id]);
         $old = $stmt->fetch()['avatar'] ?? null;
-        if ($old && file_exists(__DIR__ . $old)) unlink(__DIR__ . $old);
+
+        // Path traversal protection
+        $oldPath = null;
+        if ($old) {
+            $resolved = realpath(__DIR__ . '/../' . $old);
+            $allowedDir = realpath(__DIR__ . '/../uploads/avatars');
+            if ($resolved && $allowedDir && strpos($resolved, $allowedDir) === 0) {
+                $oldPath = $resolved;
+            }
+        }
+
         $stmt = $db->prepare("UPDATE users SET avatar = NULL WHERE id = ?");
         $stmt->execute([$user_id]);
         $_SESSION['avatar'] = null;
+        if ($oldPath) {
+            @unlink($oldPath);
+        }
         $success = 'Avatar removed.';
     }
 }

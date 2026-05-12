@@ -23,5 +23,8 @@ Thumbs.db
 .claude/
 CLAUDE.md
 
+# Backup
+backup/
+
 # Composer
 vendor/

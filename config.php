@@ -9,7 +9,7 @@ define('DB_PASS', 'pkweb123');
 
 // Session security configuration
 ini_set('session.cookie_httponly', 1);
-ini_set('session.cookie_secure', 0); // Set to 1 in production with HTTPS
+ini_set('session.cookie_secure', isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 1 : 0);
 ini_set('session.use_strict_mode', 1);
 ini_set('session.cookie_samesite', 'Strict');
 

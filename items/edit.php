@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             try {
                 $db = getDB();
-                $stmt = $db->prepare("UPDATE items SET title = ?, description = ? WHERE id = ? AND user_id = ?");
+                $stmt = $db->prepare("UPDATE items SET title = ?, description = ?, updated_at = NOW() WHERE id = ? AND user_id = ?");
                 $stmt->execute([$title, $description, $id, $_SESSION['user_id']]);
                 header('Location: dashboard.php');
                 exit;

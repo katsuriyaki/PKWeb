@@ -22,8 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['avatar_action'])) {
         }
 
         $file = $_FILES['avatar_file'];
+
+        // Server-side MIME verification (not client-supplied type)
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $realMime = finfo_file($finfo, $file['tmp_name']);
+        finfo_close($finfo);
         $allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-        if (!in_array($file['type'], $allowed)) {
+        if (!in_array($realMime, $allowed)) {
             echo json_encode(['error' => 'Only JPG, PNG, GIF, or WebP allowed.']);
             exit;
         }
@@ -35,12 +40,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['avatar_action'])) {
         $dir = __DIR__ . '/../uploads/avatars';
         if (!is_dir($dir)) mkdir($dir, 0755, true);
 
+        // Get old avatar before updating
         $db = getDB();
         $stmt = $db->prepare("SELECT avatar FROM users WHERE id = ?");
         $stmt->execute([$user_id]);
         $old = $stmt->fetch()['avatar'] ?? null;
-        if ($old && file_exists(__DIR__ . '/../' . $old)) {
-            unlink(__DIR__ . '/../' . $old);
+
+        // Path traversal protection
+        $oldPath = null;
+        if ($old) {
+            $resolved = realpath(__DIR__ . '/../' . $old);
+            $allowedDir = realpath(__DIR__ . '/../uploads/avatars');
+            if ($resolved && $allowedDir && strpos($resolved, $allowedDir) === 0) {
+                $oldPath = $resolved;
+            }
         }
 
         $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
@@ -55,9 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['avatar_action'])) {
         }
 
         if ($ok && file_exists($dest)) {
+            // Update DB first, then delete old file (prevents race condition)
             $stmt = $db->prepare("UPDATE users SET avatar = ? WHERE id = ?");
             $stmt->execute([$path, $user_id]);
             $_SESSION['avatar'] = $path;
+            if ($oldPath) {
+                @unlink($oldPath);
+            }
             echo json_encode(['success' => true, 'path' => $path]);
         } else {
             echo json_encode(['error' => 'Failed to save image.']);
@@ -69,12 +86,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['avatar_action'])) {
         $stmt = $db->prepare("SELECT avatar FROM users WHERE id = ?");
         $stmt->execute([$user_id]);
         $old = $stmt->fetch()['avatar'] ?? null;
-        if ($old && file_exists(__DIR__ . '/../' . $old)) {
-            unlink(__DIR__ . '/../' . $old);
+
+        // Path traversal protection
+        $oldPath = null;
+        if ($old) {
+            $resolved = realpath(__DIR__ . '/../' . $old);
+            $allowedDir = realpath(__DIR__ . '/../uploads/avatars');
+            if ($resolved && $allowedDir && strpos($resolved, $allowedDir) === 0) {
+                $oldPath = $resolved;
+            }
         }
+
         $stmt = $db->prepare("UPDATE users SET avatar = NULL WHERE id = ?");
         $stmt->execute([$user_id]);
         $_SESSION['avatar'] = null;
+        if ($oldPath) {
+            @unlink($oldPath);
+        }
         echo json_encode(['success' => true]);
         exit;
     }
