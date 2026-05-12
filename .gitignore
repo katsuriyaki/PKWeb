@@ -19,5 +19,9 @@ Thumbs.db
 # Logs
 *.log
 
+# Claude
+.claude/
+CLAUDE.md
+
 # Composer
 vendor/
