@@ -6,8 +6,8 @@
 - **Host**: localhost
 
 ## Tables
-- users (id, username, email, password, avatar, role, created_at)
-- items (id, user_id, title, description, created_at)
+- `users` (id, username, email, password, avatar, role, created_at)
+- `items` (id, user_id, title, description, created_at, updated_at)
 
 ## Schema
 ```sql
@@ -27,6 +27,7 @@ CREATE TABLE items (
     title VARCHAR(100) NOT NULL,
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 ```
@@ -42,5 +43,17 @@ $result = $stmt->fetch();
 ```
 
 ## Commands
-- MySQL CLI: `mysql -u pkweb -ppkweb123 pkweb`
-- Create database: `mysql -u root -e "CREATE DATABASE pkweb; CREATE USER 'pkweb'@'localhost' IDENTIFIED BY 'pkweb123'; GRANT ALL ON pkweb.* TO 'pkweb'@'localhost';"`
+```bash
+# MySQL CLI
+mysql -u pkweb -ppkweb123 pkweb
+
+# Create database
+mysql -u root -e "CREATE DATABASE pkweb; CREATE USER 'pkweb'@'localhost' IDENTIFIED BY 'pkweb123'; GRANT ALL ON pkweb.* TO 'pkweb'@'localhost';"
+
+# Make admin
+mysql -u pkweb -ppkweb123 pkweb -e "UPDATE users SET role='admin' WHERE username='youruser';"
+```
+
+## Related Docs
+- `docs/security.md` - SQL injection prevention (prepared statements)
+- `docs/troubleshooting.md` - Common DB issues

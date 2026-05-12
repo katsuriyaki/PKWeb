@@ -1,52 +1,51 @@
 # UI Design
 
-## Theme: Minimal Monochrome
-- Black background (#000)
-- White content cards with 1px solid black border
-- Sharp corners (no border-radius)
-- Bootstrap 5.3 for components
+## Theme: Warm Editorial
+Cream background, white cards, dark ink accent palette.
 
 ## CSS Variables
 ```css
 :root {
-    --black: #000;
-    --dark: #333;
-    --muted: #777;
-    --light: #999;
-    --lightest: #eee;
+    --bg:        #F5F1EA;  /* warm cream page bg */
+    --surface:   #FDFAF5;  /* white card surface */
+    --border:    #DDD8CF;  /* subtle warm border */
+    --ink:       #1A1714;  /* primary text */
+    --ink-2:     #4A4540;  /* secondary text */
+    --ink-3:     #8A8480;  /* muted/placeholder text */
+    --accent:    #C4622D;  /* terracotta accent */
+    --accent-lt: #F2E8E1;  /* light accent bg */
+    --radius:    2px;      /* sharp corners */
 }
 ```
 
 ## Typography
-- **Base**: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial
-- **Scale**: 11px → 12px → 13-14px → 16-20px
-- **Labels**: uppercase, 1-1.5px letter-spacing, 600 weight
+- **Headings**: DM Serif Display, 20-26px, letter-spacing -0.3px
+- **Body**: DM Sans, 14px
+- **Labels**: 10.5px, 600 weight, uppercase, 1.8px letter-spacing
 
 ## Buttons
-- **.btn-dark**: filled black, white text
-- **.btn-outline-dark**: outline black, black text
-- Padding: 10-14px 20px
-- Font: 12px, uppercase, 1px letter-spacing
+- **.btn-primary**: `--accent` fill, white text, 2px radius
+- **.btn-ghost**: transparent, `--border` outline
+- **.btn-danger-ghost**: transparent, red on hover
+- Font: DM Sans 12.5px, 500 weight
+- Padding: 9px 18px
 
-## Responsive Breakpoints
-- **Desktop**: ≥992px - full sidebar visible
-- **Tablet**: <992px - sidebar becomes slide-in drawer
-- **Mobile**: <768px - stacked layout, full-width buttons
+## Layout Pattern
+- Sidebar: 260px fixed, dark ink bg
+- Topbar: 72px sticky
+- Content: 40px padding (20px mobile)
 
-## Sidebar (Dashboard/Crud Pages)
-- Width: 260px fixed
-- Logo: 18px, 700 weight
-- Nav links: 14px, 14px 28px padding
-- Active state: 3px left border black
-
-## Spacing
-- Sidebar padding: 32px
-- Content padding: 40px (20px on mobile)
-- Table cells: 18px 24px
-- Form inputs: 12px 16px
+## Responsive
+- **Desktop**: ≥992px - full sidebar
+- **Tablet**: <992px - sidebar slides in as drawer
+- **Mobile**: <600px - stacked, full-width
 
 ## Components
-- .card - white with black border
-- .form-control - black border, no radius
-- .alert - bordered, no radius
-- .table - bordered header, hover rows
+- `.card` - white surface, 1px border, 2px radius
+- `.form-control` - cream bg, warm border
+- `.alert` - bordered boxes (success/danger)
+- `.table` - uppercase headers, hover rows
+
+## Related Docs
+- `docs/security.md` - Security headers (X-Frame-Options, etc.)
+- `docs/troubleshooting.md` - UI/display issues
