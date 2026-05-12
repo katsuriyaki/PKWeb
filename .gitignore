@@ -1,0 +1,23 @@
+# Environment
+.env
+config.local.php
+
+# Uploads
+uploads/avatars/*.jpg
+uploads/avatars/*.png
+uploads/avatars/*.gif
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Composer
+vendor/
